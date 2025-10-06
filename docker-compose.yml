@@ -1,11 +1,11 @@
 services:
   db:
     image: postgres:latest
-    container_name: db_pedi_um_auth
+    container_name: postgres
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 123
-      POSTGRES_DB: db_pedi_um_auth
+      POSTGRES_DB: pedium_auth
     ports:
       - "5432:5432"
     volumes:

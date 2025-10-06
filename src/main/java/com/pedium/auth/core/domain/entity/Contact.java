@@ -1,4 +1,4 @@
-package com.pedium.auth.domain.entity;
+package com.pedium.auth.core.domain.entity;
 
 public class Contact {
     

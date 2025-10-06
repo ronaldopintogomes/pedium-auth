@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: pedium-auth
+jwt:
+  private-key: /home/ronaldo/Projetos/rsa/rsa-private.pem
+  public-key: /home/ronaldo/Projetos/rsa/rsa-public.pem
+  date-expiration: 3600

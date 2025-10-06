@@ -1,4 +1,4 @@
-package com.pedium.auth.domain.exception;
+package com.pedium.auth.core.application.exception;
 
 public class UserNotFoundException extends RuntimeException {
     

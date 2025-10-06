@@ -1,5 +1,3 @@
 package com.pedium.auth.infrastructure.controller.dto;
 
-public record LoginResponse() {
-    
-}
+public record LoginResponse(String token) {}
