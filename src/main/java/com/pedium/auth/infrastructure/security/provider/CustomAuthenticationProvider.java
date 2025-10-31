@@ -1,7 +1,7 @@
 package com.pedium.auth.infrastructure.security.provider;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -37,9 +37,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if(!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Invalid password!");
         }
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-            .map(role -> new SimpleGrantedAuthority(role.name()))
-            .collect(Collectors.toList());
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
             
         return new UsernamePasswordAuthenticationToken(user, null, authorities);
     }

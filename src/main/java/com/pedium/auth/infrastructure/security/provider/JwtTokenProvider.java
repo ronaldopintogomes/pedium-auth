@@ -13,7 +13,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import com.pedium.auth.core.application.security.TokenProvider;
-import com.pedium.auth.core.domain.entity.Role;
 import com.pedium.auth.core.domain.entity.User;
 import com.pedium.auth.infrastructure.security.jwt.JwtProperties;
 
@@ -41,10 +40,10 @@ public class JwtTokenProvider implements TokenProvider {
         return Jwts.builder()
             .setSubject(user.getUid())
             .claim("name", user.getName())
+            .claim("role", user.getRole())
             .claim("contact", Map.of(
                 "email", user.getContact().getEmail(),
                 "cellphone", user.getContact().getCellphone()))
-            .claim("roles", user.getRoles().stream().map(Role::name).collect(Collectors.toList()))
             .setIssuedAt(new Date())
             .setExpiration(Date.from(Instant.now().plusSeconds(jwtProperties.getDateExpiration())))
             .signWith(rsaPrivateKey)

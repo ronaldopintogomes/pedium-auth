@@ -1,15 +1,16 @@
 package com.pedium.auth.core.domain.entity;
 
-import java.util.List;
+import java.time.OffsetDateTime;
 
 public class User {
 
     private String uid; //unique identifie, hash de cpf/cnpj
     private String name;
     private String password;
-    private List<Role> roles;
+    private Role role;
     private Contact contact;
-    
+    private OffsetDateTime registrationDate;
+
     public String getUid() {
         return uid;
     }
@@ -28,16 +29,22 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public List<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
     public Contact getContact() {
         return contact;
     }
     public void setContact(Contact contact) {
         this.contact = contact;
+    }
+    public OffsetDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+    public void setRegistrationDate(OffsetDateTime registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }
