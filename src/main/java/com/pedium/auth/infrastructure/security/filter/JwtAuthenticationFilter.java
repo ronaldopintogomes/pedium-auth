@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.pedium.auth.infrastructure.security.provider.JwtTokenProvider;
+import com.pedium.auth.core.application.security.SecurityProvider;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -19,10 +19,10 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final SecurityProvider securityProvider;
 
-    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
-        this.jwtTokenProvider = jwtTokenProvider;
+    public JwtAuthenticationFilter(SecurityProvider securityProvider) {
+        this.securityProvider = securityProvider;
     }
 
     @Override
@@ -36,10 +36,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String token = authorizationHeader.substring(7);
-        if(!jwtTokenProvider.isValidToken(token)) {
-            jwtTokenProvider.setToken(token);
-            String username = jwtTokenProvider.getClaimNameFromToken();
-            List<GrantedAuthority> roles = jwtTokenProvider.getClaimRolesFromToken();
+        if(!securityProvider.isValidToken(token)) {
+            securityProvider.setToken(token);
+            String username = securityProvider.getClaimNameFromToken();
+            List<GrantedAuthority> roles = securityProvider.getClaimRolesFromToken();
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, roles);
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             

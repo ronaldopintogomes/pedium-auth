@@ -1,6 +1,7 @@
 package com.pedium.auth.core.domain.entity;
 
-import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class User {
 
@@ -9,7 +10,8 @@ public class User {
     private String password;
     private Role role;
     private Contact contact;
-    private OffsetDateTime registrationDate;
+    private String registrationDate;
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm z");
 
     public String getUid() {
         return uid;
@@ -41,10 +43,10 @@ public class User {
     public void setContact(Contact contact) {
         this.contact = contact;
     }
-    public OffsetDateTime getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
-    public void setRegistrationDate(OffsetDateTime registrationDate) {
-        this.registrationDate = registrationDate;
+    public void setRegistrationDate(ZonedDateTime registrationDate) {
+        this.registrationDate = registrationDate.format(dateTimeFormatter);
     }
 }
